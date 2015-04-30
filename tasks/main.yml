@@ -1,0 +1,22 @@
+---
+- name: Pin specific packages
+  template: >
+    src=package-preferences.j2
+    dest=/etc/apt/preferences.d/200_{{ item.0.source | default(item.0.default) | regex_replace('[^A-Za-z0-9]', '') }}_{{ item.1.pattern | regex_replace('[^A-Za-z0-9]', '') }}
+  with_subelements:
+    - '{{ apt_pins | selectattr("packages", "defined") | list }}'
+    - packages
+
+- name: Pin sources
+  template: >
+    src=source-preferences.j2
+    dest=/etc/apt/preferences.d/100_{{ item.source | regex_replace('[^A-Za-z0-9]', '') }}
+  when: item.source is defined and (item.pin_rest is not defined or item.pin_rest)
+  with_items: apt_pins
+
+- name: Pin default(s)
+  template: >
+    src=default-preferences.j2
+    dest=/etc/apt/preferences.d/100_{{ item.default | regex_replace('[^A-Za-z0-9]', '') }}
+  when: item.default is defined
+  with_items: apt_pins

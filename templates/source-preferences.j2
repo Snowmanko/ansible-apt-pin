@@ -1,0 +1,4 @@
+# {{ ansible_managed }}
+Package: *
+Pin: {{ item.source }}
+Pin-Priority: {{ item.priority | default(200) }}

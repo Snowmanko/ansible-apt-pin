@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  author: Rhys Adams
+  description: Creates APT preferences pin files.
+  company: SSIL
+  license: BSD
+  min_ansible_version: 1.2
+  platforms:
+  - name: Ubuntu
+    versions:
+      - trusty
+  categories:
+    - packaging
+    - system
+allow_duplicates: yes
+dependencies: []
