@@ -9,7 +9,7 @@ Example Playbook
 ```
 - hosts: all
   roles:
-    - role: ssilab.apt-pin
+    - role: dstil.apt-pin
       apt_pins:
         - default: 'release v=14.04,l=Ubuntu'
           priority: 1000
