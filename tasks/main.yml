@@ -12,11 +12,11 @@
     src=source-preferences.j2
     dest=/etc/apt/preferences.d/100_{{ item.source | regex_replace('[^A-Za-z0-9]', '') }}
   when: item.source is defined and (item.pin_rest is not defined or item.pin_rest)
-  with_items: apt_pins
+  with_items: "{{ apt_pins }}"
 
 - name: Pin default(s)
   template: >
     src=default-preferences.j2
     dest=/etc/apt/preferences.d/100_{{ item.default | regex_replace('[^A-Za-z0-9]', '') }}
   when: item.default is defined
-  with_items: apt_pins
+  with_items: "{{ apt_pins }}"
